@@ -31,7 +31,7 @@ export default class PhonesPage {
         this._catalog.hide();
         this._viewer.showPhone(phone);
       });
-    })
+    });
 
     this._catalog.on('add', event => {
       let phoneId = event.detail;
@@ -49,11 +49,16 @@ export default class PhonesPage {
   _initViewer() {
     this._viewer = new PhoneViewer({
       element: this._element.querySelector('[data-component="phone-viewer"]'),
-    })
+    });
 
     this._viewer.on('back', () => {
       this._viewer.hide();
       this._catalog.show();
+    });
+
+    this._viewer.on('add', event => {
+      let phoneId = event.detail;
+      this._cart.addItem(phoneId)
     })
 
   }

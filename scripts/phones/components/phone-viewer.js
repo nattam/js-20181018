@@ -10,7 +10,11 @@ export default class PhoneViewer extends Component {
 
       let customEvent = new CustomEvent('back');
       this._element.dispatchEvent(customEvent);
-    })
+    });
+
+      this.on('click', '[data-element="button-add"]', event => {
+          this._trigger('add', event.target.dataset.phoneId);
+      });
   }
 
   showPhone(phone) {
@@ -27,7 +31,7 @@ export default class PhoneViewer extends Component {
       <img class="phone" src="${phone.images[0]}">
 
     <button data-element="button-back">Back</button>
-    <button>Add to basket</button>
+    <button data-element="button-add" data-phone-id="${phone.id}">Add to basket</button>
 
 
     <h1>${phone.name}</h1>
